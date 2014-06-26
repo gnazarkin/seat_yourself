@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start_time: 2014-06-26 10:18:51
+  user_id: 1
+  bar_id: 1
+  number_of_patrons: 1
+
+two:
+  start_time: 2014-06-26 10:18:51
+  user_id: 1
+  bar_id: 1
+  number_of_patrons: 1
