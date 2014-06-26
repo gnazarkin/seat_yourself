@@ -4,6 +4,7 @@ class RestaurantsController < ApplicationController
   end
 
   def show
+    @reservation = Reservation.new
     @restaurant = Restaurant.find(params[:id])
   end
 
@@ -25,6 +26,10 @@ class RestaurantsController < ApplicationController
     end
   end
 
+  def destroy
+  end
+
+
   def update
     @restaurant = Restaurant.find(params[:id])
 
@@ -35,7 +40,10 @@ class RestaurantsController < ApplicationController
     end 
   end
 
-  def destroy
+  private
+  def restaurant_params
+    params.require(:restaurant).permit(:name, :address, :capacity, :description)
   end
+
 
 end

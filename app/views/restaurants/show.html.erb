@@ -1,2 +1,33 @@
-<h1>Bars#show</h1>
-<p>Find me in app/views/bars/show.html.erb</p>
+<h1>Restaurant Information</h1><br/>
+<h3><%=@restaurant.name%> - $<%=@restaurant.address%> </h3>
+	<p>Capacity: <%= @restaurant.capacity %></p>
+	<p>Description: <%= @restaurant.description %></p>
+
+
+	<h4>Make a Reservation</h4>
+
+  <%= form_for([@restaurant, @reservation]) do |f| %>
+    <% if @reservation.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@reservation.errors.count, "error") %> prohibited this review from being saved:</h2>
+
+        <ul>
+        <% @reservation.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :start_time %><br />
+      <%= select_datetime(Time.now, prefix: 'start_time', discard_minute: true, ampm: true)%>
+    </div>
+    <div class="field">
+    	<%= f.label :number_of_patrons %><br />
+    	<%= f.number_field :number_of_patrons %><br />
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
