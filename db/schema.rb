@@ -11,15 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140626151530) do
+ActiveRecord::Schema.define(version: 20140626180508) do
 
   create_table "reservations", force: true do |t|
     t.datetime "start_time"
     t.integer  "user_id"
-    t.integer  "bar_id"
     t.integer  "number_of_patrons"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "restaurant_id"
   end
 
   create_table "restaurants", force: true do |t|

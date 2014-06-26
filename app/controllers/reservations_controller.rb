@@ -1,28 +1,32 @@
 class ReservationsController < ApplicationController
-	before_filter :load_restaurant, :load_user
+	before_filter :load_restaurant
 
   def create
   	@reservation = @restaurant.reservations.new(reservation_params)
-  	@reservartion.user_id = current_user.id
+  	@reservation.user_id = current_user.id
 
   	if @reservation.save
-  		render @restaurant.show, notice: "Successfully created reservratio"
+  		render 'restaurants/show', notice: "Successfully created reservratio"
   	else 
   		flash.now[:alert] = "Your reservation failed to save"
-  		render @restaurant.show
+  		render 'restaurants/show'
   	end
   end
 
   def show
-  	@reservation = Reservration.find(params[:id])
+  	@reservation = Reservation.find(params[:id])
   end
 
   def destroy
   end
 
   private
-  def reservartion_params
-  	params.require(:reservartion).permit(:start_time, :user_id, :bar_id, :number_of_patrons)
+  def reservation_params
+  	params.require(:reservation).permit(:start_time, :restaurant_id, :number_of_patrons)
+  end
+
+  def load_restaurant
+  	@restaurant = Restaurant.find(params[:restaurant_id])
   end
 
 end

@@ -8,6 +8,15 @@
   <h1>SeatYourself</h1>
 </head>
 <body>
+  
+  <% if flash[:notice] %>
+    <p id="notice"><%= flash[:notice] %></p>
+  <% end %>
+  <% if flash[:alert] %>
+    <p id="alert"><%= flash[:alert] %></p>
+  <% end %>
+
+
   <%= link_to "Restaurants", restaurants_path %>
   <%= link_to "My Account", user_path(current_user) %>
   <%= link_to "Create New Restaurant", new_restaurant_path %>
