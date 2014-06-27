@@ -1,4 +1,14 @@
 <h1><%= @user.name %></h1>
 <p>Email: <%= @user.email %></p>
 <h3>Reservations</h3>
+	<% @user.reservations.each do |reservation| %>
+	<p><%= reservation.restaurant.name %> - <%= reservation.restaurant.address %> for <%= reservation.number_of_patrons %> on <%= reservation.start_time %> 
+		<%= button_to "Cancel", restaurant_reservation_path(reservation.restaurant.id, reservation.id), method:'delete' %>
+	</p>
+		
+	<% end %>
+
 <h3>Restaurants</h3>
+	<% @user.restaurants.each do |restaurant| %>
+		<p><%= restaurant.name %> - <%= restaurant.address %></p>
+	<% end %>

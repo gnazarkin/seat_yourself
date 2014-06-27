@@ -21,11 +21,11 @@
 
     <div class="field">
       <%= f.label :start_time %><br />
-      <%= select_datetime(Time.now, prefix: 'start_time', discard_minute: true, ampm: true)%>
+      <%= f.datetime_select(:start_time, discard_minute: true, ampm: true)%>
     </div>
     <div class="field">
     	<%= f.label :number_of_patrons %><br />
-    	<%= f.number_field :number_of_patrons %><br />
+    	<%= f.select :number_of_patrons, (2..15) %><br />
     </div>
     <div class="actions">
       <%= f.submit %>

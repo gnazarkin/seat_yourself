@@ -3,4 +3,5 @@ class Restaurant < ActiveRecord::Base
 	validates :capacity, :numericality => {:only_integer => true}
 
 	has_many :reservations
+	belongs_to :user
 end

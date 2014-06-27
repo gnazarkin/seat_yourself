@@ -3,13 +3,15 @@ class ReservationsController < ApplicationController
 
   def create
   	@reservation = @restaurant.reservations.new(reservation_params)
+    @reservation.start_time = @reservation.start_time.change(min: 0, sec:0)
   	@reservation.user_id = current_user.id
 
-  	if @reservation.save
-  		render 'restaurants/show', notice: "Successfully created reservratio"
+    if @reservation.reserved?(current_user, @reservation.start_time)
+      redirect_to @restaurant, notice: 'You can only have one reservation at a restaurant'
+    elsif @reservation.available?(reservation_params[:number_of_patrons].to_i, @reservation.start_time) && @reservation.save
+      redirect_to @restaurant, notice: "Successfully created reservation"
   	else 
-  		flash.now[:alert] = "Your reservation failed to save"
-  		render 'restaurants/show'
+  		redirect_to @restaurant, notice: "There are not enough spots at the restaurant for that hour"
   	end
   end
 
@@ -18,6 +20,9 @@ class ReservationsController < ApplicationController
   end
 
   def destroy
+    @reservation = Reservation.find(params[:id])
+    @reservation.destroy
+    redirect_to current_user, notice: "Reservation cancelled"
   end
 
   private

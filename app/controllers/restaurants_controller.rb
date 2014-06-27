@@ -1,4 +1,6 @@
 class RestaurantsController < ApplicationController
+  before_filter :ensure_logged_in, :only => [:show]
+
   def index
     @restaurants = Restaurant.all
   end
@@ -6,6 +8,7 @@ class RestaurantsController < ApplicationController
   def show
     @reservation = Reservation.new
     @restaurant = Restaurant.find(params[:id])
+
   end
 
   def new
@@ -18,6 +21,7 @@ class RestaurantsController < ApplicationController
 
   def create
     @restaurant = Restaurant.new(restaurant_params)
+    @restaurant.user_id = current_user.id
 
     if @restaurant.save
       redirect_to restaurants_path(@restaurant)
@@ -28,7 +32,6 @@ class RestaurantsController < ApplicationController
 
   def destroy
   end
-
 
   def update
     @restaurant = Restaurant.find(params[:id])
