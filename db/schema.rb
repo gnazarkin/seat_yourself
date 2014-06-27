@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140626180508) do
+ActiveRecord::Schema.define(version: 20140627161815) do
 
   create_table "reservations", force: true do |t|
     t.datetime "start_time"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 20140626180508) do
     t.string   "category"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   create_table "reviews", force: true do |t|

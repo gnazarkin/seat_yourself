@@ -1,6 +1,7 @@
 class ReservationsController < ApplicationController
 	before_filter :load_restaurant
 
+
   def create
   	@reservation = @restaurant.reservations.new(reservation_params)
     @reservation.start_time = @reservation.start_time.change(min: 0, sec:0)

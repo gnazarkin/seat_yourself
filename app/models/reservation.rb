@@ -11,4 +11,5 @@ class Reservation < ActiveRecord::Base
 	def reserved?(current_user, start_time)
 		restaurant.reservations.where(start_time: start_time, user_id: user.id).exists?
 	end
+
 end
