@@ -33,6 +33,8 @@ gem 'pry', :group => :development
 
 gem 'geocoder'
 gem 'foundation-rails'
+
+gem 'kaminari'
 # Use unicorn as the app server
 # gem 'unicorn'
 

@@ -1,15 +1,17 @@
-<h1>Restaurants</h1>
+<h1>Restaurants <small><%= page_entries_info @restaurants %></small></h1>
 
-<div id="search">
+<div id="restaurant-search">
   <%= form_tag restaurants_path, method: :get, authentication: false, id: 'search-form' do %>
     <%= text_field_tag :search, params[:search] %>
     <%= submit_tag "Search" %>
   <% end %> 
 </div>
 
-<% @restaurants.each do |restaurant| %>
-	<p><%= restaurant[:name] %> - <%= restaurant.address %>
-		<%= link_to "Show", "/restaurants/#{restaurant.id}" %>
-	</p>
-<% end %>
+<div id="restaurants">
+	<%= render @restaurants %>
+</div>
 
+<%= paginate @restaurants %>
+
+
+ 

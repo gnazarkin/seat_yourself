@@ -1,0 +1,11 @@
+body{
+	padding-left:200px;
+	padding-top:200px;
+}
+
+#restaurant-search{
+	margin-left: auto;
+	margin-right: auto;
+	width: 40%;
+
+}

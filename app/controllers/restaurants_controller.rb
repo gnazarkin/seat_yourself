@@ -5,8 +5,18 @@ class RestaurantsController < ApplicationController
     if params[:search]
       @restaurants = Restaurant.where("LOWER(name) LIKE LOWER(?)", "%#{params[:search]}%")
     else
-      @restaurants = Restaurant.all
+      @restaurants = Restaurant.order('restaurants.created_at DESC').page(params[:page])
+    end 
+
+    # if request.xhr?
+    #   render @restaurants
+    # end
+
+    respond_to do |format|
+      format.js
+      format.html
     end
+
   end
 
   def show
