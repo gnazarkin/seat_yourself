@@ -32,6 +32,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'pry', :group => :development
 
 gem 'geocoder'
+
 gem 'foundation-rails'
 
 gem 'kaminari'

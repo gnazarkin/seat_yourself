@@ -1,0 +1,12 @@
+<% @restaurant.reviews.each do |review| %>
+  <div class="review">  
+    <p>
+      <%= review.content %>
+      <br>
+      <% if review.user != nil %>
+        <em> by <%= review.user.email %></em>
+        Added on: <%= review.created_at %>
+      <% end %>
+    </p>
+  </div>
+<% end %>

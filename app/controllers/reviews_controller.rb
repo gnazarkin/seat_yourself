@@ -9,11 +9,15 @@ class ReviewsController < ApplicationController
     @review = @restaurant.reviews.build(review_params)
     @review.user_id = current_user.id
 
-    if @review.save
-      redirect_to @restaurant, notice: 'Review created successfully'
-    else 
-      render 'restaurant/show'
-    end
+    respond_to do |format|
+      if @review.save
+        format.html { redirect_to restaurant_path(@restaurant.id), notice: 'Review added.' }
+        format.js {} # This will look for app/views/reviews/create.js.erb
+      else
+        format.html { render 'restaurants/show', alert: 'There was an error.'  }
+        format.js {} # This will look for app/views/reviews/create.js.erb
+      end
+    end    
   end
 
   def destroy
