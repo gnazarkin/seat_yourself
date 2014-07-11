@@ -6,6 +6,7 @@ class Restaurant < ActiveRecord::Base
 	belongs_to :user
 	geocoded_by :get_address
 	before_save :geocode
+	has_many :reviews
 
 
   def get_address

@@ -1,7 +1,46 @@
 <h1>Restaurant Information</h1><br/>
-<h3><%=@restaurant.name%> - $<%=@restaurant.address%> </h3>
+<h3><%=@restaurant.name%> - <%=@restaurant.address%> </h3>
 	<p>Capacity: <%= @restaurant.capacity %></p>
 	<p>Description: <%= @restaurant.description %></p>
+
+  <h4>Reviews</h4>
+
+  <p>Reviews for <%= @restaurant.name %></p>
+
+  <% @restaurant.reviews.each do |review| %>
+    <p>
+      <%= review.content %>
+      <br>
+      <% if review.user != nil %>
+        <em> by <%= review.user.email %></em>
+        Added on: <%= review.created_at %>
+      <% end %>
+    </p>
+  <% end %>
+
+  <h3>New Review</h3>
+
+    <%= form_for([@restaurant, @review]) do |f| %>
+    <% if @review.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
+
+        <ul>
+        <% @review.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :content %><br />
+      <%= f.text_area :content %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
 
 
 	<h4>Make a Reservation</h4>

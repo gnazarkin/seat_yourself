@@ -1,4 +1,7 @@
-$('#restaurants').html("<%= escape_javascript(render @restaurants) %>");
-
-$('#restaurants').html("<%= j(render @restaurants) %>");
+<% if params[:search] %>
+	$('#restaurants').html('<%= j render(@restaurants) %>');
+<% else %>
+	$('#restaurants').append('<%= j render(@restaurants) %>');
+	$('.pagination').replaceWith('<%= j paginate(@restaurants) %>');
+<% end %>
 

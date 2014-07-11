@@ -3,7 +3,7 @@ class RestaurantsController < ApplicationController
 
   def index
     if params[:search]
-      @restaurants = Restaurant.where("LOWER(name) LIKE LOWER(?)", "%#{params[:search]}%")
+      @restaurants = Restaurant.where("LOWER(name) LIKE LOWER(?)", "%#{params[:search]}%").page(1)
     else
       @restaurants = Restaurant.order('restaurants.created_at DESC').page(params[:page])
     end 
@@ -22,6 +22,10 @@ class RestaurantsController < ApplicationController
   def show
     @reservation = Reservation.new
     @restaurant = Restaurant.find(params[:id])
+
+    if current_user
+      @review = @restaurant.reviews.build
+    end
 
   end
 
