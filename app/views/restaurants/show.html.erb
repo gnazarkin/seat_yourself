@@ -13,7 +13,7 @@
 
   <h3>New Review</h3>
 
-    <%= form_for [@restaurant, @review], :remote => true do |f| %>
+    <%= form_for ([@restaurant, @review]) do |f| %>
       
       <div id="review-form-errors">
         <%= render :partial => "/restaurants/review_form_errors" %>
@@ -72,4 +72,16 @@
             .removeAttr('disabled');
         });
   });
+</script>
+
+<script id="review-template" type="text/x-handlebars-template">
+  <div class="review">
+    <p>
+      {{content}}
+      {{#if user}}
+        <em> by {{user.name}}</em>
+          Added on: {{created_at}}
+        {{/if}}
+    </p>
+  </div>
 </script>

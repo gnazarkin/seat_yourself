@@ -12,10 +12,11 @@ class ReviewsController < ApplicationController
     respond_to do |format|
       if @review.save
         format.html { redirect_to restaurant_path(@restaurant.id), notice: 'Review added.' }
-        format.js {} # This will look for app/views/reviews/create.js.erb
+        # format.js {} # This will look for app/views/reviews/create.js.erb
+        format.json { render json: @review, include: :user}
       else
         format.html { render 'restaurants/show', alert: 'There was an error.'  }
-        format.js {} # This will look for app/views/reviews/create.js.erb
+        # format.js {} # This will look for app/views/reviews/create.js.erb
       end
     end    
   end

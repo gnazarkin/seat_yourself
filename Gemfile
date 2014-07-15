@@ -36,6 +36,8 @@ gem 'geocoder'
 gem 'foundation-rails'
 
 gem 'kaminari'
+
+gem 'handlebars_assets'
 # Use unicorn as the app server
 # gem 'unicorn'
 

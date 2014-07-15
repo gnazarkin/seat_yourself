@@ -1,4 +1,3 @@
-
 $(document).on('ready page:load', function() {
 
   $(window).scroll(function() {
@@ -8,4 +7,19 @@ $(document).on('ready page:load', function() {
       return $.getScript(url);
     }
   });
-});
+
+  $('#new_review').submit(function(ev) {
+  	ev.preventDefault();
+
+  	$.ajax({
+  		url: $(this).attr('action'),
+  		type: 'POST',
+  		dataType: 'json',
+  		data: $(this).serialize()
+  	}).done(function(data) {
+  		var source   = $("#review-template").html();
+      var template = Handlebars.compile(source);
+      $('#review-list').append(template(data));
+    });
+  });
+ });
